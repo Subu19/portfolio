@@ -1,0 +1,69 @@
+body {
+  background: linear-gradient(32deg, #020024 0%, #090979 13%, #00d4ff 100%);
+  margin: 0;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+#canvas1 {
+  display: flex;
+  position: absolute;
+  right: 0;
+}
+
+.cursor {
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  z-index: 1000;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.hoverToolTip {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 0;
+  opacity: 1;
+  opacity: 0;
+  z-index: 2;
+  transform-origin: center;
+  background-color: #63d56db6;
+  border-radius: 30px;
+  justify-content: left;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  position: absolute;
+  top: 100px;
+  overflow: hidden;
+}
+
+.tooltipImg {
+  height: 40px;
+}
+
+.hoverToolTip .title {
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 20px;
+}
+
+.connection {
+  border: 7px #000;
+  border-radius: 50px;
+}
+
+._main {
+  z-index: 1;
+  height: 100vh;
+  width: 50vw;
+  display: flex;
+  position: absolute;
+  right: 0;
+}
+
+/*# sourceMappingURL=index.34df27b5.css.map */
