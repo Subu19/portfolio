@@ -1,0 +1,23 @@
+<svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_3_11" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="29" height="28">
+<line x1="2.82843" y1="2" x2="26" y2="25.1716" stroke="url(#paint0_linear_3_11)" stroke-width="4" stroke-linecap="round"/>
+<line x1="3" y1="25.1716" x2="26.1716" y2="2" stroke="url(#paint1_linear_3_11)" stroke-width="4" stroke-linecap="round"/>
+</mask>
+<g mask="url(#mask0_3_11)">
+<rect y="-1" width="29" height="29" fill="url(#paint2_linear_3_11)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_3_11" x1="13" y1="15" x2="12.2929" y2="15.7071" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DE3C3C"/>
+<stop offset="1" stop-color="#D14A4A" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint1_linear_3_11" x1="16" y1="15" x2="16.7071" y2="15.7071" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DE3C3C"/>
+<stop offset="1" stop-color="#D14A4A" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint2_linear_3_11" x1="14.5" y1="-1" x2="14.5" y2="28" gradientUnits="userSpaceOnUse">
+<stop stop-color="#6055D9"/>
+<stop offset="1" stop-color="#C045FA"/>
+</linearGradient>
+</defs>
+</svg>

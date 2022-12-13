@@ -682,7 +682,7 @@ function animatePullEffect() {
     ctx.beginPath();
     ctx.moveTo(c.width, 0);
     ctx.lineTo(100, 0);
-    if (Math.abs(mouse.x - cBound.left - 100) < 100) makeStickyEffect(true);
+    if (Math.abs(mouse.x - cBound.left - 100) < 100 && (0, _globalVeriable.veriables).loadingPage == false) makeStickyEffect(true);
     else makeStickyEffect(false);
     //complete line
     ctx.lineTo(100, c.height);

@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/index.34df27b5.css" />
+    <link rel="stylesheet" href="/index.34df27b5.css">
     <title>Document</title>
     <style></style>
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>(function() {
+    var pushState = history.pushState;
+    var replaceState = history.replaceState;
+    history.pushState = function() {
+        pushState.apply(history, arguments);
+        window.dispatchEvent(new Event("pushstate"));
+        window.dispatchEvent(new Event("locationchange"));
+    };
+    history.replaceState = function() {
+        replaceState.apply(history, arguments);
+        window.dispatchEvent(new Event("replacestate"));
+        window.dispatchEvent(new Event("locationchange"));
+    };
+    window.addEventListener("popstate", function() {
+        window.dispatchEvent(new Event("locationchange"));
+    });
+})();
+
+</script>
   </head>
   <body>
+    <video src="/video.a7197634.mp4" autoplay="" muted="" style="display: none" id="video"></video>
     <canvas id="canvas1"></canvas>
     <div class="hoverToolTip" id="hoverToolTip">
-      <img src="/project.7d7c79fd.png" class="tooltipImg" />
+      <img src="/project.7d7c79fd.png" class="tooltipImg">
       <div class="title" id="tooltipTitle">Projects</div>
     </div>
     <div class="cursor" id="cursor"></div>
-    <div class="_main" id="_main"></div>
+    <div class="_main" id="_transition"></div>
+    <div class="_root" id="_root"></div>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script src="/index.7dfc5c48.js"></script>
     <script src="/index.18dbc454.js" defer=""></script>

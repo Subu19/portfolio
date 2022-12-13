@@ -533,11 +533,26 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"hhI4x":[function(require,module,exports) {
 var _gsap = require("gsap");
-const $hoverables = document.querySelectorAll(".hoverable");
+var $hoverables = document.querySelectorAll(".hoverable");
 for(let i = 0; i < $hoverables.length; i++){
     $hoverables[i].addEventListener("mouseenter", onMouseHover);
     $hoverables[i].addEventListener("mouseleave", onMouseHoverOut);
 }
+const observer = new MutationObserver(function(mutations_list) {
+    mutations_list.forEach(function(mutation) {
+        mutation.addedNodes.forEach(function(added_node) {
+            if (added_node.classList.contains("hoverable")) {
+                $hoverables = document.querySelectorAll(".hoverable");
+                added_node.addEventListener("mouseleave", onMouseHoverOut);
+                added_node.addEventListener("mouseenter", onMouseHover);
+            }
+        });
+    });
+});
+observer.observe(document.getElementById("_root"), {
+    subtree: true,
+    childList: true
+});
 function onMouseHover() {
     (0, _gsap.gsap).to(".cursor", {
         width: 70,

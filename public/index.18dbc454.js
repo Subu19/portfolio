@@ -533,6 +533,9 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"1SICI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "focusProject", ()=>focusProject);
+parcelHelpers.export(exports, "focusMain", ()=>focusMain);
 var _three = require("three");
 var _gsap = require("gsap");
 var _orbitControls = require("three/examples/jsm/controls/OrbitControls");
@@ -545,12 +548,14 @@ var _optimerBoldTypefaceJson = require("three/examples/fonts/optimer_bold.typefa
 var _optimerBoldTypefaceJsonDefault = parcelHelpers.interopDefault(_optimerBoldTypefaceJson);
 //custom imports
 var _cursor = require("./cursor");
-var _globalVeriable = require("./globalVeriable");
+var _pages = require("./pages");
+var _mathutils = require("three/src/math/mathutils");
 const fontLoader = new (0, _fontLoader.FontLoader)();
 const testfont = fontLoader.parse((0, _optimerBoldTypefaceJsonDefault.default));
-const roomObj = new URL(require("a18b28575890b78f"));
+const roomObj = new URL(require("ae474c0d7b6a0b85"));
 const assetLoader = new (0, _gltfloader.GLTFLoader)();
 const group = new _three.Group();
+const video = document.getElementById("video");
 var model, mouse, hoverEffect = true;
 mouse = new _three.Vector2();
 const raycaster = new _three.Raycaster();
@@ -563,15 +568,16 @@ assetLoader.load(roomObj.href, function(gltf) {
             node.receiveShadow = true;
         }
     });
+    // model.scale.set(1, 2);
     group.add(gltf.scene);
-    (0, _gsap.gsap).to(camera.position, {
-        x: 7,
-        y: 7,
-        z: -7,
-        duration: 3,
-        delay: 0,
-        ease: (0, _gsap.Elastic).easeInOut
-    });
+    video.play();
+    // if (window.location.pathname == "/" || window.location.pathname == "/home") {
+    //   focusMain();
+    //   console.log("home");
+    // }
+    // if (window.location.pathname == "/projects") {
+    // }
+    (0, _pages.initializePage)();
 });
 const renderer = new _three.WebGL1Renderer({
     antialias: true,
@@ -586,17 +592,17 @@ renderer.outputEncoding = _three.sRGBEncoding;
 //dat setting
 const datGUI = new _datGui.GUI();
 const options = {
-    angle: 0,
-    penumbra: 0,
-    intensity: 1,
-    speed: 1,
-    color: "#CAF7F4"
+    x: -3,
+    y: 2,
+    z: -1,
+    height: 1,
+    width: 1.5
 };
-// datGUI.add(options, "angle", 0, 1);
-// datGUI.add(options, "intensity", 0, 1);
-// datGUI.add(options, "speed", 0, 0.1);
-// datGUI.add(options, "penumbra", 0, 1);
-// datGUI.addColor(options, "color");
+// datGUI.add(options, "x", -5, 5);
+// datGUI.add(options, "y", -5, 5);
+// datGUI.add(options, "z", -5, 5);
+// datGUI.add(options, "height", 0, 2);
+// datGUI.add(options, "width", 0, 2);
 const scene = new _three.Scene();
 scene.background = new _three.Color(options.back);
 scene.fog = new _three.FogExp2(0xffffff, 0.025);
@@ -646,23 +652,34 @@ spotlight.penumbra = 0;
 spotlight.intensity = 0.5;
 spotlight.shadow.bias = -0.001;
 scene.add(spotlight);
-const orbit = new (0, _orbitControls.OrbitControls)(camera, renderer.domElement);
 camera.position.set(15, 15, -15);
-camera.rotation.set(-2.277939208016823, 1.5558644636022532, 2.5884225334614985);
+camera.rotation.set(-2.356194490192345, 0.6154797086703874, 2.617993877991494);
+// const orbit = new OrbitControls(camera, renderer.domElement);
 const axisHelper = new _three.AxesHelper(5);
-orbit.update();
 //plane
-const geometry = new _three.PlaneGeometry(100, 100);
 const material = new _three.MeshBasicMaterial({
     color: 0xf06262,
     side: _three.DoubleSide
 });
+//video
+//initialize video
+let videoTexture = new _three.VideoTexture(video);
+videoTexture.magFilter = _three.LinearFilter;
+videoTexture.minFilter = _three.LinearFilter;
+let videoMaterial = new _three.MeshBasicMaterial({
+    map: videoTexture,
+    side: _three.FrontSide,
+    toneMapped: false
+});
+let videoGeometry = new _three.PlaneGeometry(1.2, 0.7);
+let videoScreen = new _three.Mesh(videoGeometry, videoMaterial);
+videoScreen.position.set(-3.6, 2.02, -1.065);
+videoScreen.rotateY((0, _mathutils.degToRad)(90));
+group.add(videoScreen);
+//make video object
 scene.add(group);
 function animate() {
-    directionalLight.angle = options.angle;
-    directionalLight.penumbra = options.penumbra;
-    directionalLight.intensity = options.intensity;
-    directionalLight.speed = options.speed;
+    // orbit.update();
     scene.background = null;
     renderer.render(scene, camera);
 }
@@ -684,39 +701,60 @@ document.addEventListener("mousemove", function(e) {
 document.addEventListener("click", (e)=>{
     checkInterection(e);
 });
+function focusMain() {
+    (0, _gsap.gsap).to(camera.position, {
+        x: 6.325110101156437,
+        y: 6.966003116713916,
+        z: -7.708886782129645,
+        duration: 3,
+        delay: 0,
+        ease: (0, _gsap.Elastic).easeInOut
+    });
+    (0, _gsap.gsap).to(camera.rotation, {
+        x: -2.356194490192345,
+        y: 0.6154797086703874,
+        z: 2.617993877991494,
+        duration: 3,
+        delay: 0,
+        ease: (0, _gsap.Elastic).easeInOut.config(1, 3),
+        onComplete: ()=>{
+            hoverEffect = true;
+        }
+    });
+}
+function focusProject() {
+    hoverEffect = false;
+    // moveCamera(-2.7, 2.9, -1.3, 3.0, 1.5, -3.0);
+    (0, _gsap.gsap).to(group.rotation, {
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 1
+    });
+    (0, _gsap.gsap).to(group.position, {
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 1
+    });
+    (0, _gsap.gsap).to(camera.position, {
+        x: -1.0912174938901869,
+        y: 2.6576913656422634,
+        z: -1.9925526422854145,
+        duration: 1.5
+    });
+    (0, _gsap.gsap).to(camera.rotation, {
+        x: -1.6800270710804033,
+        y: 1.5244806104519255,
+        z: 1.6801434018160195,
+        duration: 1.5
+    });
+}
 function checkInterection(event) {
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(model.children);
     intersects.forEach((e)=>{
-        if (e.object.name == "Cube050_3") {
-            hoverEffect = false;
-            // moveCamera(-2.7, 2.9, -1.3, 3.0, 1.5, -3.0);
-            (0, _gsap.gsap).to(group.rotation, {
-                x: 0,
-                y: 0,
-                z: 0,
-                duration: 1
-            });
-            (0, _gsap.gsap).to(group.position, {
-                x: 0,
-                y: 0,
-                z: 0,
-                duration: 1
-            });
-            (0, _gsap.gsap).to(camera.position, {
-                x: -1.0912174938901869,
-                y: 2.6576913656422634,
-                z: -1.9925526422854145,
-                duration: 1.5
-            });
-            (0, _gsap.gsap).to(camera.rotation, {
-                x: -1.6800270710804033,
-                y: 1.5244806104519255,
-                z: 1.6801434018160195,
-                duration: 1.5
-            });
-            (0, _cursor.updateOnClick)(event, e.object.name);
-        }
+        if (e.object.name == "Cube050_3") (0, _cursor.updateOnClick)(event, e.object.name);
     });
 }
 function checkHover() {
@@ -729,7 +767,7 @@ function checkHover() {
     _project ? (0, _cursor.updateCursorHover)(true) : (0, _cursor.updateCursorHover)(false);
 }
 
-},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls":"7mqRv","dat.gui":"k3xQk","three/examples/jsm/loaders/GLTFLoader":"dVRsF","a18b28575890b78f":"hRJBw","gsap":"fPSuC","three/examples/jsm/environments/RoomEnvironment":"a3Q6M","three/examples/jsm/loaders/FontLoader":"h0CPK","three/examples/jsm/geometries/TextGeometry":"d5vi9","three/examples/fonts/optimer_bold.typeface.json":"9jPWF","@parcel/transformer-js/src/esmodule-helpers.js":"kIica","./cursor":"3v1v0","./globalVeriable":"acJy3"}],"ktPTu":[function(require,module,exports) {
+},{"three":"ktPTu","three/examples/jsm/controls/OrbitControls":"7mqRv","dat.gui":"k3xQk","three/examples/jsm/loaders/GLTFLoader":"dVRsF","ae474c0d7b6a0b85":"hRJBw","gsap":"fPSuC","three/examples/jsm/environments/RoomEnvironment":"a3Q6M","three/examples/jsm/loaders/FontLoader":"h0CPK","three/examples/jsm/geometries/TextGeometry":"d5vi9","three/examples/fonts/optimer_bold.typeface.json":"9jPWF","@parcel/transformer-js/src/esmodule-helpers.js":"kIica","./cursor":"3v1v0","./pages":"cXZuu","three/src/math/mathutils":"9xBeA"}],"ktPTu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "ACESFilmicToneMapping", ()=>ACESFilmicToneMapping);
@@ -39360,17 +39398,24 @@ var _pages = require("./pages");
 var hoverOn = false;
 const cursor = document.getElementById("cursor");
 const tooltip = document.getElementById("hoverToolTip");
-const main = document.getElementById("_main");
+const main = document.getElementById("_transition");
 // jQuery("#cursor").connections({ to: "#hoverToolTip" });
 function updateCursor(e) {
     (0, _gsap.TweenMax).to($("#cursor"), 0.4, {
         x: e.pageX - cursor.clientWidth / 2,
-        y: e.pageY - cursor.clientHeight / 2
+        y: e.pageY - cursor.clientHeight / 2,
+        onUpdate: ()=>{
+            if (hoverOn) {
+                tooltip.style.left = e.clientX - tooltip.clientWidth / 2 + 200 + "px";
+                tooltip.style.top = e.clientY - tooltip.clientHeight / 2 - 90 + "px";
+                jQuery("#cursor").connections("update");
+            }
+        }
     });
-    if (hoverOn) {
-        tooltip.style.left = e.clientX - tooltip.clientWidth / 2 + 100 + "px";
-        tooltip.style.top = e.clientY - tooltip.clientHeight / 2 - 60 + "px";
-    }
+    // if (hoverOn) {
+    //   tooltip.style.left = e.clientX - tooltip.clientWidth / 2 + 100 + "px";
+    //   tooltip.style.top = e.clientY - tooltip.clientHeight / 2 - 60 + "px";
+    // }
     jQuery("#cursor").connections("update");
 }
 function updateCursorHover(bool) {
@@ -39380,14 +39425,12 @@ function updateCursorHover(bool) {
             //   background: "rgba(75, 177, 87, 0.4)",
             height: 50,
             width: 50,
-            duration: 0.5,
-            ease: (0, _gsap.Elastic).easeOut.config(1, 0.2)
+            duration: 0.5
         });
         (0, _gsap.gsap).to(".hoverToolTip", {
             height: 50,
             opacity: 1,
-            duration: 0.5,
-            ease: (0, _gsap.Elastic).easeOut.config(1, 0.2)
+            duration: 0.4
         });
         jQuery("#cursor").connections({
             to: "#hoverToolTip"
@@ -39405,7 +39448,7 @@ function updateCursorHover(bool) {
         (0, _gsap.gsap).to(".hoverToolTip", {
             height: 0,
             opacity: 0,
-            duration: 0.5
+            duration: 0.4
         });
         hoverOn = false;
     }
@@ -39413,109 +39456,617 @@ function updateCursorHover(bool) {
 function updateOnClick(e, element) {
     main.style.left = e.clientX - 25 + "px";
     main.style.top = e.clientY - 25 + "px";
-    if (element == "Cube050_3" && (0, _pages.openedPage) != (0, _pages.pages).project) {
-        (0, _pages.openTransition)();
-        (0, _pages.showProject)();
-    }
+    if (element == "Cube050_3" && (0, _pages.openedPage) != (0, _pages.pages).project) (0, _pages.showProject)();
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"kIica","gsap":"fPSuC","./globalVeriable":"acJy3","./pages":"cXZuu"}],"acJy3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "colors", ()=>colors);
+parcelHelpers.export(exports, "veriables", ()=>veriables);
+parcelHelpers.export(exports, "pages", ()=>pages);
 const colors = {
     mainBack: "#ffffff",
     currentBack: "#ffffff",
     projectBack: "#182c3e",
     background: ""
 };
+const veriables = {
+    loadingPage: false
+};
+const pages = {
+    home: 1,
+    project: 2,
+    openedPage: 1,
+    openTransition: false
+};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"kIica"}],"cXZuu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initializePage", ()=>initializePage);
 parcelHelpers.export(exports, "showHome", ()=>showHome);
 parcelHelpers.export(exports, "showProject", ()=>showProject);
 parcelHelpers.export(exports, "openTransition", ()=>openTransition);
-parcelHelpers.export(exports, "openedPage", ()=>openedPage);
-parcelHelpers.export(exports, "pages", ()=>pages);
+parcelHelpers.export(exports, "openedPage", ()=>(0, _globalVeriable.openedPage));
+parcelHelpers.export(exports, "pages", ()=>(0, _globalVeriable.pages));
 var _gsap = require("gsap");
 var _globalVeriable = require("./globalVeriable");
-const main = document.getElementById("_main");
-var pages = {
-    home: 1,
-    project: 2
-};
-var openedPage;
+var _main = require("./main");
+const main = document.getElementById("_transition");
 function initializePage() {
-    const pathName = document.location.pathname;
-    switch(pathName){
-        case "/":
-            showHome();
-            break;
-        case "/home":
-            showHome();
-            break;
-        case "/projects":
-            showProject();
-            break;
+    const pathName = location.pathname;
+    if (pathName == "/" || pathName == "/home") showHome();
+    if (pathName == "/projects") showProject();
+    if (pathName.match(/projects\/[0-9]/g)) {
+        showOneProject();
+        console.log("changed");
     }
 }
-initializePage();
+window.onpopstate = ()=>{
+    initializePage();
+};
+window.addEventListener("locationchange", ()=>{
+    console.log("triggered" + location.pathname);
+    initializePage();
+});
 function openTransition() {
-    (0, _gsap.gsap).to("._main", {
-        width: 50,
-        height: 50,
-        background: (0, _globalVeriable.colors).projectBack,
-        duration: 0.5,
-        borderRadius: 50,
-        ease: (0, _gsap.Elastic).easeOut.config(1, 0.2),
-        onComplete: ()=>{
-            (0, _gsap.gsap).to("._main", {
-                left: window.innerWidth / 2 - 100,
-                top: 0,
-                height: window.innerHeight,
-                width: window.innerWidth / 2 + 100,
-                borderRadius: 0,
-                duration: 1,
-                ease: (0, _gsap.Power4).easeOut,
-                onComplete: ()=>{
-                    (0, _globalVeriable.colors).currentBack = (0, _globalVeriable.colors).projectBack;
-                    main.style.height = "0px";
-                    main.style.width = "0";
-                    main.style.borderRadius = "50%";
-                }
-            });
-        }
+    return new Promise((resolve, reject)=>{
+        (0, _gsap.gsap).to("._main", {
+            width: 50,
+            height: 50,
+            background: (0, _globalVeriable.colors).projectBack,
+            duration: 0.5,
+            borderRadius: 50,
+            ease: (0, _gsap.Elastic).easeOut.config(1, 0.2),
+            onComplete: ()=>{
+                (0, _gsap.gsap).to("._main", {
+                    left: window.innerWidth / 2 - 100,
+                    top: 0,
+                    height: window.innerHeight,
+                    width: window.innerWidth / 2 + 100,
+                    borderRadius: 0,
+                    duration: 1,
+                    ease: (0, _gsap.Power4).easeOut,
+                    onComplete: ()=>{
+                        (0, _globalVeriable.colors).currentBack = (0, _globalVeriable.colors).projectBack;
+                        // main.style.height = "0px";
+                        // main.style.width = "0";
+                        main.style.visibility = "hidden";
+                        (0, _globalVeriable.pages).openTransition = true;
+                        resolve("success");
+                    }
+                });
+            }
+        });
+    });
+}
+function closeTransition() {
+    return new Promise((resolve, reject)=>{
+        (0, _gsap.gsap).to(".main", {
+            visibility: "visible",
+            duration: 0.1,
+            onStart: ()=>{
+                main.style.visibility = "visible";
+                (0, _globalVeriable.colors).currentBack = (0, _globalVeriable.colors).mainBack;
+            },
+            onComplete: ()=>{
+                (0, _gsap.gsap).to("._main", {
+                    left: 0,
+                    top: 0,
+                    height: "0px",
+                    width: "0px",
+                    borderRadius: 50,
+                    duration: 1,
+                    delay: 1,
+                    ease: (0, _gsap.Power4).easeOut,
+                    onComplete: ()=>{
+                        resolve("success");
+                        (0, _globalVeriable.pages).openTransition = false;
+                    }
+                });
+            }
+        });
     });
 }
 function showHome() {
-    (0, _gsap.gsap).to(".intro", {
-        duration: 1,
-        top: 0,
-        opacity: 1,
-        delay: 0.5
-    });
-    openedPage = pages.home;
+    if ((0, _globalVeriable.pages).openTransition) {
+        (0, _globalVeriable.veriables).loadingPage = true;
+        closeTransition().then(()=>{
+            (0, _globalVeriable.veriables).loadingPage = false;
+        });
+        (0, _globalVeriable.pages).openedPage = (0, _globalVeriable.pages).home;
+        (0, _main.focusMain)();
+    } else {
+        (0, _globalVeriable.pages).openedPage = (0, _globalVeriable.pages).home;
+        (0, _main.focusMain)();
+    }
 }
 function hideHome() {
-    (0, _gsap.gsap).to(".intro", {
-        duration: 1,
-        top: -innerHeight / 3,
-        opacity: 0
-    });
+// gsap.to(".intro", {
+//   duration: 1,
+//   top: -innerHeight / 3,
+//   opacity: 0,
+// });
+}
+function showOneProject() {
+    (0, _globalVeriable.pages).openedPage = (0, _globalVeriable.pages).project;
+    (0, _globalVeriable.veriables).loadingPage = false;
+    (0, _globalVeriable.colors).currentBack = (0, _globalVeriable.colors).mainBack;
+    (0, _main.focusProject)();
 }
 function showProject() {
-    hideHome();
-    openedPage = pages.project;
-    window.history.pushState({}, "Projects", "/projects");
-    (0, _gsap.gsap).to(".projects", {
-        duration: 1,
-        top: 0,
-        opacity: 1,
-        delay: 1
+    // hideHome();
+    return new Promise((resolve, reject)=>{
+        (0, _globalVeriable.veriables).loadingPage = true;
+        if ((0, _globalVeriable.pages).openedPage != 2) openTransition().then(()=>{
+            (0, _globalVeriable.pages).openedPage = (0, _globalVeriable.pages).project;
+            window.history.pushState({}, "Projects", "/projects");
+            (0, _globalVeriable.veriables).loadingPage = false;
+            resolve("success");
+        });
+        else {
+            (0, _globalVeriable.pages).openedPage = (0, _globalVeriable.pages).project;
+            (0, _globalVeriable.veriables).loadingPage = false;
+            (0, _globalVeriable.colors).currentBack = (0, _globalVeriable.colors).projectBack;
+        }
+        (0, _main.focusProject)();
     });
+// gsap.to(".projects", {
+//   duration: 1,
+//   top: 0,
+//   opacity: 1,
+//   delay: 1,
+// });
 }
 
-},{"gsap":"fPSuC","./globalVeriable":"acJy3","@parcel/transformer-js/src/esmodule-helpers.js":"kIica"}]},["jTCn7","1SICI"], "1SICI", "parcelRequire6913")
+},{"gsap":"fPSuC","./globalVeriable":"acJy3","@parcel/transformer-js/src/esmodule-helpers.js":"kIica","./main":"1SICI"}],"9xBeA":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "DEG2RAD", ()=>DEG2RAD);
+parcelHelpers.export(exports, "RAD2DEG", ()=>RAD2DEG);
+parcelHelpers.export(exports, "generateUUID", ()=>generateUUID);
+parcelHelpers.export(exports, "clamp", ()=>clamp);
+parcelHelpers.export(exports, "euclideanModulo", ()=>euclideanModulo);
+parcelHelpers.export(exports, "mapLinear", ()=>mapLinear);
+parcelHelpers.export(exports, "inverseLerp", ()=>inverseLerp);
+parcelHelpers.export(exports, "lerp", ()=>lerp);
+parcelHelpers.export(exports, "damp", ()=>damp);
+parcelHelpers.export(exports, "pingpong", ()=>pingpong);
+parcelHelpers.export(exports, "smoothstep", ()=>smoothstep);
+parcelHelpers.export(exports, "smootherstep", ()=>smootherstep);
+parcelHelpers.export(exports, "randInt", ()=>randInt);
+parcelHelpers.export(exports, "randFloat", ()=>randFloat);
+parcelHelpers.export(exports, "randFloatSpread", ()=>randFloatSpread);
+parcelHelpers.export(exports, "seededRandom", ()=>seededRandom);
+parcelHelpers.export(exports, "degToRad", ()=>degToRad);
+parcelHelpers.export(exports, "radToDeg", ()=>radToDeg);
+parcelHelpers.export(exports, "isPowerOfTwo", ()=>isPowerOfTwo);
+parcelHelpers.export(exports, "ceilPowerOfTwo", ()=>ceilPowerOfTwo);
+parcelHelpers.export(exports, "floorPowerOfTwo", ()=>floorPowerOfTwo);
+parcelHelpers.export(exports, "setQuaternionFromProperEuler", ()=>setQuaternionFromProperEuler);
+parcelHelpers.export(exports, "normalize", ()=>normalize);
+parcelHelpers.export(exports, "denormalize", ()=>denormalize);
+const _lut = [
+    "00",
+    "01",
+    "02",
+    "03",
+    "04",
+    "05",
+    "06",
+    "07",
+    "08",
+    "09",
+    "0a",
+    "0b",
+    "0c",
+    "0d",
+    "0e",
+    "0f",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "1a",
+    "1b",
+    "1c",
+    "1d",
+    "1e",
+    "1f",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "2a",
+    "2b",
+    "2c",
+    "2d",
+    "2e",
+    "2f",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "3a",
+    "3b",
+    "3c",
+    "3d",
+    "3e",
+    "3f",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "4a",
+    "4b",
+    "4c",
+    "4d",
+    "4e",
+    "4f",
+    "50",
+    "51",
+    "52",
+    "53",
+    "54",
+    "55",
+    "56",
+    "57",
+    "58",
+    "59",
+    "5a",
+    "5b",
+    "5c",
+    "5d",
+    "5e",
+    "5f",
+    "60",
+    "61",
+    "62",
+    "63",
+    "64",
+    "65",
+    "66",
+    "67",
+    "68",
+    "69",
+    "6a",
+    "6b",
+    "6c",
+    "6d",
+    "6e",
+    "6f",
+    "70",
+    "71",
+    "72",
+    "73",
+    "74",
+    "75",
+    "76",
+    "77",
+    "78",
+    "79",
+    "7a",
+    "7b",
+    "7c",
+    "7d",
+    "7e",
+    "7f",
+    "80",
+    "81",
+    "82",
+    "83",
+    "84",
+    "85",
+    "86",
+    "87",
+    "88",
+    "89",
+    "8a",
+    "8b",
+    "8c",
+    "8d",
+    "8e",
+    "8f",
+    "90",
+    "91",
+    "92",
+    "93",
+    "94",
+    "95",
+    "96",
+    "97",
+    "98",
+    "99",
+    "9a",
+    "9b",
+    "9c",
+    "9d",
+    "9e",
+    "9f",
+    "a0",
+    "a1",
+    "a2",
+    "a3",
+    "a4",
+    "a5",
+    "a6",
+    "a7",
+    "a8",
+    "a9",
+    "aa",
+    "ab",
+    "ac",
+    "ad",
+    "ae",
+    "af",
+    "b0",
+    "b1",
+    "b2",
+    "b3",
+    "b4",
+    "b5",
+    "b6",
+    "b7",
+    "b8",
+    "b9",
+    "ba",
+    "bb",
+    "bc",
+    "bd",
+    "be",
+    "bf",
+    "c0",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "c6",
+    "c7",
+    "c8",
+    "c9",
+    "ca",
+    "cb",
+    "cc",
+    "cd",
+    "ce",
+    "cf",
+    "d0",
+    "d1",
+    "d2",
+    "d3",
+    "d4",
+    "d5",
+    "d6",
+    "d7",
+    "d8",
+    "d9",
+    "da",
+    "db",
+    "dc",
+    "dd",
+    "de",
+    "df",
+    "e0",
+    "e1",
+    "e2",
+    "e3",
+    "e4",
+    "e5",
+    "e6",
+    "e7",
+    "e8",
+    "e9",
+    "ea",
+    "eb",
+    "ec",
+    "ed",
+    "ee",
+    "ef",
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4",
+    "f5",
+    "f6",
+    "f7",
+    "f8",
+    "f9",
+    "fa",
+    "fb",
+    "fc",
+    "fd",
+    "fe",
+    "ff"
+];
+let _seed = 1234567;
+const DEG2RAD = Math.PI / 180;
+const RAD2DEG = 180 / Math.PI;
+// http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript/21963136#21963136
+function generateUUID() {
+    const d0 = Math.random() * 0xffffffff | 0;
+    const d1 = Math.random() * 0xffffffff | 0;
+    const d2 = Math.random() * 0xffffffff | 0;
+    const d3 = Math.random() * 0xffffffff | 0;
+    const uuid = _lut[d0 & 0xff] + _lut[d0 >> 8 & 0xff] + _lut[d0 >> 16 & 0xff] + _lut[d0 >> 24 & 0xff] + "-" + _lut[d1 & 0xff] + _lut[d1 >> 8 & 0xff] + "-" + _lut[d1 >> 16 & 0x0f | 0x40] + _lut[d1 >> 24 & 0xff] + "-" + _lut[d2 & 0x3f | 0x80] + _lut[d2 >> 8 & 0xff] + "-" + _lut[d2 >> 16 & 0xff] + _lut[d2 >> 24 & 0xff] + _lut[d3 & 0xff] + _lut[d3 >> 8 & 0xff] + _lut[d3 >> 16 & 0xff] + _lut[d3 >> 24 & 0xff];
+    // .toLowerCase() here flattens concatenated strings to save heap memory space.
+    return uuid.toLowerCase();
+}
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+}
+// compute euclidean modulo of m % n
+// https://en.wikipedia.org/wiki/Modulo_operation
+function euclideanModulo(n, m) {
+    return (n % m + m) % m;
+}
+// Linear mapping from range <a1, a2> to range <b1, b2>
+function mapLinear(x, a1, a2, b1, b2) {
+    return b1 + (x - a1) * (b2 - b1) / (a2 - a1);
+}
+// https://www.gamedev.net/tutorials/programming/general-and-gameplay-programming/inverse-lerp-a-super-useful-yet-often-overlooked-function-r5230/
+function inverseLerp(x, y, value) {
+    if (x !== y) return (value - x) / (y - x);
+    else return 0;
+}
+// https://en.wikipedia.org/wiki/Linear_interpolation
+function lerp(x, y, t) {
+    return (1 - t) * x + t * y;
+}
+// http://www.rorydriscoll.com/2016/03/07/frame-rate-independent-damping-using-lerp/
+function damp(x, y, lambda, dt) {
+    return lerp(x, y, 1 - Math.exp(-lambda * dt));
+}
+// https://www.desmos.com/calculator/vcsjnyz7x4
+function pingpong(x, length = 1) {
+    return length - Math.abs(euclideanModulo(x, length * 2) - length);
+}
+// http://en.wikipedia.org/wiki/Smoothstep
+function smoothstep(x, min, max) {
+    if (x <= min) return 0;
+    if (x >= max) return 1;
+    x = (x - min) / (max - min);
+    return x * x * (3 - 2 * x);
+}
+function smootherstep(x, min, max) {
+    if (x <= min) return 0;
+    if (x >= max) return 1;
+    x = (x - min) / (max - min);
+    return x * x * x * (x * (x * 6 - 15) + 10);
+}
+// Random integer from <low, high> interval
+function randInt(low, high) {
+    return low + Math.floor(Math.random() * (high - low + 1));
+}
+// Random float from <low, high> interval
+function randFloat(low, high) {
+    return low + Math.random() * (high - low);
+}
+// Random float from <-range/2, range/2> interval
+function randFloatSpread(range) {
+    return range * (0.5 - Math.random());
+}
+// Deterministic pseudo-random float in the interval [ 0, 1 ]
+function seededRandom(s) {
+    if (s !== undefined) _seed = s;
+    // Mulberry32 generator
+    let t = _seed += 0x6D2B79F5;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+}
+function degToRad(degrees) {
+    return degrees * DEG2RAD;
+}
+function radToDeg(radians) {
+    return radians * RAD2DEG;
+}
+function isPowerOfTwo(value) {
+    return (value & value - 1) === 0 && value !== 0;
+}
+function ceilPowerOfTwo(value) {
+    return Math.pow(2, Math.ceil(Math.log(value) / Math.LN2));
+}
+function floorPowerOfTwo(value) {
+    return Math.pow(2, Math.floor(Math.log(value) / Math.LN2));
+}
+function setQuaternionFromProperEuler(q, a, b, c, order) {
+    // Intrinsic Proper Euler Angles - see https://en.wikipedia.org/wiki/Euler_angles
+    // rotations are applied to the axes in the order specified by 'order'
+    // rotation by angle 'a' is applied first, then by angle 'b', then by angle 'c'
+    // angles are in radians
+    const cos = Math.cos;
+    const sin = Math.sin;
+    const c2 = cos(b / 2);
+    const s2 = sin(b / 2);
+    const c13 = cos((a + c) / 2);
+    const s13 = sin((a + c) / 2);
+    const c1_3 = cos((a - c) / 2);
+    const s1_3 = sin((a - c) / 2);
+    const c3_1 = cos((c - a) / 2);
+    const s3_1 = sin((c - a) / 2);
+    switch(order){
+        case "XYX":
+            q.set(c2 * s13, s2 * c1_3, s2 * s1_3, c2 * c13);
+            break;
+        case "YZY":
+            q.set(s2 * s1_3, c2 * s13, s2 * c1_3, c2 * c13);
+            break;
+        case "ZXZ":
+            q.set(s2 * c1_3, s2 * s1_3, c2 * s13, c2 * c13);
+            break;
+        case "XZX":
+            q.set(c2 * s13, s2 * s3_1, s2 * c3_1, c2 * c13);
+            break;
+        case "YXY":
+            q.set(s2 * c3_1, c2 * s13, s2 * s3_1, c2 * c13);
+            break;
+        case "ZYZ":
+            q.set(s2 * s3_1, s2 * c3_1, c2 * s13, c2 * c13);
+            break;
+        default:
+            console.warn("THREE.MathUtils: .setQuaternionFromProperEuler() encountered an unknown order: " + order);
+    }
+}
+function denormalize(value, array) {
+    switch(array.constructor){
+        case Float32Array:
+            return value;
+        case Uint16Array:
+            return value / 65535.0;
+        case Uint8Array:
+            return value / 255.0;
+        case Int16Array:
+            return Math.max(value / 32767.0, -1);
+        case Int8Array:
+            return Math.max(value / 127.0, -1);
+        default:
+            throw new Error("Invalid component type.");
+    }
+}
+function normalize(value, array) {
+    switch(array.constructor){
+        case Float32Array:
+            return value;
+        case Uint16Array:
+            return Math.round(value * 65535.0);
+        case Uint8Array:
+            return Math.round(value * 255.0);
+        case Int16Array:
+            return Math.round(value * 32767.0);
+        case Int8Array:
+            return Math.round(value * 127.0);
+        default:
+            throw new Error("Invalid component type.");
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"kIica"}]},["jTCn7","1SICI"], "1SICI", "parcelRequire6913")
 
 //# sourceMappingURL=index.18dbc454.js.map
