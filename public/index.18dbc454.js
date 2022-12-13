@@ -571,12 +571,6 @@ assetLoader.load(roomObj.href, function(gltf) {
     // model.scale.set(1, 2);
     group.add(gltf.scene);
     video.play();
-    // if (window.location.pathname == "/" || window.location.pathname == "/home") {
-    //   focusMain();
-    //   console.log("home");
-    // }
-    // if (window.location.pathname == "/projects") {
-    // }
     (0, _pages.initializePage)();
 });
 const renderer = new _three.WebGL1Renderer({
@@ -39478,7 +39472,7 @@ const pages = {
     home: 1,
     project: 2,
     openedPage: 1,
-    openTransition: false
+    openTransition: true
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"kIica"}],"cXZuu":[function(require,module,exports) {
@@ -39599,7 +39593,7 @@ function showProject() {
     // hideHome();
     return new Promise((resolve, reject)=>{
         (0, _globalVeriable.veriables).loadingPage = true;
-        if ((0, _globalVeriable.pages).openedPage != 2) openTransition().then(()=>{
+        if (!(0, _globalVeriable.pages).openTransition) openTransition().then(()=>{
             (0, _globalVeriable.pages).openedPage = (0, _globalVeriable.pages).project;
             window.history.pushState({}, "Projects", "/projects");
             (0, _globalVeriable.veriables).loadingPage = false;
@@ -39609,6 +39603,7 @@ function showProject() {
             (0, _globalVeriable.pages).openedPage = (0, _globalVeriable.pages).project;
             (0, _globalVeriable.veriables).loadingPage = false;
             (0, _globalVeriable.colors).currentBack = (0, _globalVeriable.colors).projectBack;
+            (0, _globalVeriable.pages).openTransition = true;
         }
         (0, _main.focusProject)();
     });
