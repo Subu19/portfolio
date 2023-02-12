@@ -50,6 +50,31 @@ const ProjectSlider = (props) => {
       }
     }
   }, [selected]);
+  const checkArrowKey = (e) => {
+    if (e.key == "ArrowLeft" && selected != 1) {
+      e.preventDefault();
+      setSelected(selected - 1);
+    }
+    if (e.key == "ArrowRight" && selected != projects.length) {
+      e.preventDefault();
+      setSelected(selected + 1);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      checkArrowKey(e);
+    });
+    // return document.removeEventListener("keydown", (e) => {
+    //   if (e.key == "ArrowLeft" && selected != 1) {
+    //     e.preventDefault();
+    //     setSelected(selected - 1);
+    //   }
+    //   if (e.key == "ArrowRight" && selected != projects.length) {
+    //     e.preventDefault();
+    //     setSelected(selected - 1);
+    //   }
+    // });
+  }, []);
   return (
     <>
       <div className="projectSlider">
@@ -93,7 +118,7 @@ const ProjectSlider = (props) => {
         ) : (
           ""
         )}
-        {selected != 5 ? (
+        {selected != projects.length ? (
           <IoArrowForwardCircle
             className="sButton bright hoverable"
             onClick={() => {

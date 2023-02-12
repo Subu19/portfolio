@@ -14,6 +14,7 @@ import { TfiLayoutSlider } from "react-icons/tfi";
 import animenepal from "../assets/Animenepal.svg";
 import k6 from "../assets/k6.svg";
 import kurasu from "../assets/kurasu.svg";
+import craftnepal from "../assets/craftnepal.png";
 import Project from "../components/Project";
 
 const projects = [
@@ -28,7 +29,7 @@ const projects = [
     desc: "Duis anim veniam dolor ad ut. Culpa ipsum cillum est laboris ullamco exercitation enim ipsum est nostrud eu tempor. Nulla Lorem ipsum cillum reprehenderit nulla exercitation. Non et irure exercitation commodo elit. Quis qui ipsum aliquip pariatur sunt cupidatat. Ea laboris reprehenderit eu commodo ipsum non dolore Lorem exercitation ea. Labore amet eu dolor ipsum nulla laborum consectetur cupidatat pariatur sunt voluptate.",
   },
   {
-    img: "https://scontent.fktm8-1.fna.fbcdn.net/v/t39.30808-6/305803149_181069747821977_252386477056147190_n.png?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=-ECtcS1onw0AX_covtv&_nc_ht=scontent.fktm8-1.fna&oh=00_AfB7qZnPgJ_t1XASRnKNMoWqVqjGzLYtmuc2VxwGlRzDdg&oe=6395FF92",
+    img: craftnepal,
     title: "CraftNepal",
     desc: "Sit sit Lorem qui incididunt proident nostrud adipisicing. Est est amet qui ullamco in consectetur dolor velit deserunt esse cupidatat incididunt. Cupidatat exercitation eu Lorem non ipsum consectetur velit in qui minim elit. Cupidatat consequat sint et esse commodo aute exercitation. Non excepteur Lorem dolore in irure eu quis culpa consequat.",
   },

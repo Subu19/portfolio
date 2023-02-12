@@ -13,7 +13,7 @@ const openTransition = (mousePosition) => {
     const contentE = document.getElementsByClassName("right")[0];
     // element.classList.add("projectTransition");
     element.style.visibility = "visible";
-    element.style.left = mousePosition.x + "px";
+    element.style.right = window.innerWidth - mousePosition.x + "px";
     element.style.top = mousePosition.y + "px";
     element.style.backgroundColor = "white";
     element.style.zIndex = "2";
