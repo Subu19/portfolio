@@ -6,7 +6,7 @@ export const useFetchProject = () => {
   const [projects, setProjects] = useState([]);
   const getData = () => {
     axios
-      .get("http://localhost:1337/api/projects?populate=*")
+      .get("http://192.168.0.114:1337/api/projects?populate=*")
       .then((res) => {
         setProjects(res.data.data);
         setLoadingProjects(false);
