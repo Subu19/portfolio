@@ -7,6 +7,8 @@ import { MdDoubleArrow } from "react-icons/md";
 import { MouseContext } from "./contexts/mouseContext";
 import openTransition from "./functions/openTransition";
 import { useHistory } from "react-router-dom";
+import animenepal from "../assets/Animenepal.svg";
+
 const ProjectSlider = (props) => {
   const { projects } = props;
   const [selected, setSelected] = useState(1);
@@ -39,7 +41,7 @@ const ProjectSlider = (props) => {
               }
             },
           });
-        }, 500);
+        }, 600);
       } else {
         element.classList.remove("selectedCard");
         let e = element.getElementsByClassName("cardDesc")[0].children;
@@ -50,31 +52,7 @@ const ProjectSlider = (props) => {
       }
     }
   }, [selected]);
-  const checkArrowKey = (e) => {
-    if (e.key == "ArrowLeft" && selected != 1) {
-      e.preventDefault();
-      setSelected(selected - 1);
-    }
-    if (e.key == "ArrowRight" && selected != projects.length) {
-      e.preventDefault();
-      setSelected(selected + 1);
-    }
-  };
-  useEffect(() => {
-    document.addEventListener("keydown", (e) => {
-      checkArrowKey(e);
-    });
-    // return document.removeEventListener("keydown", (e) => {
-    //   if (e.key == "ArrowLeft" && selected != 1) {
-    //     e.preventDefault();
-    //     setSelected(selected - 1);
-    //   }
-    //   if (e.key == "ArrowRight" && selected != projects.length) {
-    //     e.preventDefault();
-    //     setSelected(selected - 1);
-    //   }
-    // });
-  }, []);
+
   return (
     <>
       <div className="projectSlider">
@@ -84,11 +62,21 @@ const ProjectSlider = (props) => {
             ? projects.map((project) => {
                 return (
                   <div className="card hoverable">
-                    <img src={project.img} className="sliderImg"></img>
+                    <img
+                      src={
+                        "http://localhost:1337" +
+                        project.attributes.CoverImage.data.attributes.url
+                      }
+                      className="sliderImg"
+                    ></img>
 
                     <div className="cardDesc">
-                      <div className="cardTitle hide">{project.title}</div>
-                      <div className="cardDetails hide">{project.desc}</div>
+                      <div className="cardTitle hide">
+                        {project.attributes.Name}
+                      </div>
+                      <div className="cardDetails hide">
+                        {project.attributes.Description}
+                      </div>
                       <MdDoubleArrow
                         className="cardButton hide"
                         onClick={() =>

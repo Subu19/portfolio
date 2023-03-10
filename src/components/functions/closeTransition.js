@@ -5,9 +5,6 @@ const closeTransition = () => {
     gsap.to(".content", {
       top: "-100%",
       duration: 1,
-      onComplete: () => {
-        to ? history.push(to) : history.goBack();
-      },
     });
     const element = document.getElementsByClassName("_main")[0];
     const contentE = document.getElementsByClassName("right")[0];

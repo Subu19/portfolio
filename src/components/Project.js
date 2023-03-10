@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./css/projectPage.css";
 import exitButton from "../assets/exit.svg";
 import closeTransition from "./functions/closeTransition";
 import { useHistory } from "react-router-dom";
+import kute from "kute.js";
 const Project = () => {
   const history = useHistory();
+
   return (
     <div className="projectHeader">
       Project
