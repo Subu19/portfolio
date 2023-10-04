@@ -12,20 +12,17 @@ body {
 }
 
 .cursor {
-  width: 30px;
-  height: 30px;
   pointer-events: none;
   mix-blend-mode: difference;
   z-index: 1000;
   background: #fff;
   border-radius: 50%;
+  width: 30px;
+  height: 30px;
   position: absolute;
 }
 
 .hoverToolTip {
-  width: -moz-fit-content;
-  width: fit-content;
-  height: 0;
   opacity: 1;
   opacity: 0;
   z-index: 2;
@@ -34,6 +31,9 @@ body {
   border-radius: 30px;
   justify-content: left;
   align-items: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 0;
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
@@ -59,9 +59,9 @@ body {
 
 ._main {
   z-index: 1;
+  border-radius: 50%;
   width: 0;
   height: 0;
-  border-radius: 50%;
   display: flex;
   position: absolute;
 }

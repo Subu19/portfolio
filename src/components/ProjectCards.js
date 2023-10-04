@@ -1,18 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import "../components/css/project.css";
-import gsap, { Back, Elastic, Power0, Power4 } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ScrollReveal from "./ScrollReveal";
-gsap.registerPlugin(ScrollTrigger);
 const ProjectCards = () => {
   return (
     <div className="pCard_containner">
-      <ScrollReveal className="pCard">test</ScrollReveal>
-      <ScrollReveal className="pCard">test</ScrollReveal>
-      <ScrollReveal className="pCard">test</ScrollReveal>
-      <ScrollReveal className="pCard">test</ScrollReveal>
-      <ScrollReveal className="pCard">test</ScrollReveal>
-      <ScrollReveal className="pCard">test</ScrollReveal>
+      <div className="pCard">test</div>
+      <div className="pCard">test</div>
+      <div
+        className="pCard"
+        data-aos="fade-up"
+        data-aos-anchor-placement="bottom-bottom"
+        data-aos-easing="ease-out-back"
+      >
+        test
+      </div>
+      <div
+        className="pCard"
+        data-aos="fade-up"
+        data-aos-anchor-placement="bottom-bottom"
+        data-aos-easing="ease-out-back"
+      >
+        test
+      </div>
+      <div
+        className="pCard"
+        data-aos="fade-up"
+        data-aos-anchor-placement="bottom-bottom"
+        data-aos-easing="ease-out-back"
+      >
+        test
+      </div>
+      <div
+        className="pCard"
+        data-aos="fade-up"
+        data-aos-anchor-placement="bottom-bottom"
+        data-aos-easing="ease-out-back"
+      >
+        test
+      </div>
     </div>
   );
 };

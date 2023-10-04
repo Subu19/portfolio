@@ -1,0 +1,60 @@
+.projectContainner {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+}
+.project {
+  height: auto;
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 15px;
+}
+.projectImage {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+.projectImg {
+  position: absolute;
+  transition: 0.5s;
+  width: 100%;
+}
+.projectImage:hover .projectImageCover {
+  opacity: 1;
+  margin-top: 0px;
+  scale: 1.5;
+}
+.projectImage:hover .projectImageMain {
+  opacity: 0;
+  transition: 0.5s;
+  scale: 1.1;
+  margin-top: -50%;
+}
+.projectImageCover {
+  opacity: 0;
+  margin-top: 50%;
+  transition: 0.5s;
+}
+.project .projectTitle {
+  margin: 0px;
+  margin-top: 10px;
+  font-size: 35px;
+  color: rgb(247, 195, 53);
+  font-family: "Times New Roman", Times, serif;
+}
+.projectTitle::after {
+  content: ".";
+  color: aqua;
+}
+.project .projectDesc {
+  font-size: 15px;
+  margin-top: 10px;
+  font-family: monospace;
+}

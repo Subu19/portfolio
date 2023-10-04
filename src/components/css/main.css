@@ -11,6 +11,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
+  font-family: "Inter", sans-serif;
 }
 .content {
   font-size: 50px;
@@ -35,5 +36,93 @@
 }
 
 .content {
-  top: -1 00%;
+  /* top: -100%; */
+}
+.imageView_Containner {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  height: 100vh;
+  width: calc(100vw / 2);
+  background-color: rgba(255, 255, 255, 0.753);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageView {
+  width: calc((100vw / 2));
+  height: fit-content;
+}
+.previewExit {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 20px;
+  padding: 10px;
+  margin: 20px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.profilePic {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 300px;
+  transition: 0.5s;
+  border-radius: 50%;
+}
+.profilePicContainner:hover .profilePic {
+  top: 70%;
+  transition: 0.5s;
+}
+.profilePicContainner:hover {
+  box-shadow: none;
+  cursor: grab;
+  transition: 0.5s;
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+.profilePicContainner {
+  position: relative;
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: rgba(148, 243, 255, 0.613) 0px 0px 5cqh;
+  transition: 0.5s;
+  margin-top: 50px;
+  opacity: 0;
+}
+.HomeIndex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+.myname {
+  color: rgb(0, 0, 0);
+  font-family: "Encode Sans", sans-serif;
+  font-weight: 100;
+  user-select: none;
+  margin-top: 100px;
+  opacity: 0;
+}
+.myDesc {
+  font-size: 15px;
+  width: 80%;
+  text-align: center;
+  margin-top: 100px;
+  opacity: 0;
+  user-select: none;
 }

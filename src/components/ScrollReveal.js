@@ -9,7 +9,7 @@ const ScrollReveal = ({ children, style, className }) => {
         delay: 100,
         container: ".right",
         easing: "ease-out",
-        distance: "100px",
+        distance: "50px",
         origin: "bottom",
       });
     }

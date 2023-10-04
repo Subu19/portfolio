@@ -2,10 +2,10 @@ import gsap from "gsap";
 
 const closeTransition = () => {
   return new Promise((resolve, reject) => {
-    gsap.to(".content", {
-      top: "-100%",
-      duration: 1,
-    });
+    // gsap.to(".content", {
+    //   top: "-100%",
+    //   duration: 1,
+    // });
     const element = document.getElementsByClassName("_main")[0];
     const contentE = document.getElementsByClassName("right")[0];
     // element.classList.add("projectTransition");

@@ -97,7 +97,7 @@
             data.rect_to.top,
             data.rect_to.right,
             data.rect_to.bottom,
-            data.rect_to.left, 
+            data.rect_to.left
         ];
         data.hidden = 0 === (data.cache[0] | data.cache[1] | data.cache[2] | data.cache[3]) || 0 === (data.cache[4] | data.cache[5] | data.cache[6] | data.cache[7]);
         data.unmodified = true;

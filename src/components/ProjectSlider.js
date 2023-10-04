@@ -78,10 +78,10 @@ const ProjectSlider = (props) => {
                         {project.attributes.Description}
                       </div>
                       <MdDoubleArrow
-                        className="cardButton hide"
+                        className="cardButton hide hoverable"
                         onClick={() =>
                           openTransition(mousePosition).then(() =>
-                            history.push("/projects/1")
+                            history.push("/projects/" + project.id)
                           )
                         }
                       ></MdDoubleArrow>
