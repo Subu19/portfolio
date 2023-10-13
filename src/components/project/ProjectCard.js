@@ -55,7 +55,7 @@ const ProjectCard = ({ project }) => {
         </div>
         <img
           src={
-            "http://localhost:1337" +
+            process.env.REACT_APP_API_URL +
             project.attributes.MainImage.data.attributes.url
           }
           className="projectCardImg"

@@ -68,10 +68,12 @@ const ImageSlider = ({ media }) => {
         <PhotoProvider>
           {media.data.map((img) => {
             return (
-              <PhotoView src={"http://localhost:1337" + img.attributes.url}>
+              <PhotoView
+                src={process.env.REACT_APP_API_URL + img.attributes.url}
+              >
                 <img
                   className={"sliderItem"}
-                  src={"http://localhost:1337" + img.attributes.url}
+                  src={process.env.REACT_APP_API_URL + img.attributes.url}
                 ></img>
               </PhotoView>
             );

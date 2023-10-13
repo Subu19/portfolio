@@ -45,7 +45,7 @@ const ProjectBigCard = ({ project }) => {
         >
           <img
             src={
-              "http://localhost:1337" +
+              process.env.REACT_APP_API_URL +
               project.attributes.MainImage.data.attributes.url
             }
             onClick={() =>
@@ -59,7 +59,7 @@ const ProjectBigCard = ({ project }) => {
             onMouseMove={(e) => moveImage(e)}
             ref={coverRef}
             src={
-              "http://localhost:1337" +
+              process.env.REACT_APP_API_URL +
               project.attributes.CoverImage.data.attributes.url
             }
             className="projectImageCover projectImg"

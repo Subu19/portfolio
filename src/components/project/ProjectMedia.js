@@ -13,14 +13,14 @@ const ProjectMedia = ({ media }) => {
         {media.data.map((photo) => {
           return (
             <img
-              src={"http://localhost:1337" + photo.attributes.url}
+              src={process.env.REACT_APP_API_URL + photo.attributes.url}
               className="projectMedia"
               style={{
                 transform:
                   "rotateZ(" + (Math.floor(Math.random() * 60) - 30) + "deg)",
               }}
               onClick={() =>
-                showImage("http://localhost:1337" + photo.attributes.url)
+                showImage(process.env.REACT_APP_API_URL + photo.attributes.url)
               }
             ></img>
           );

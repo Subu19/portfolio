@@ -7,7 +7,8 @@ export const useFetchProjects = () => {
   const getData = () => {
     axios
       .get(
-        "http://localhost:1337/api/projects?populate=CoverImage&populate=MainImage&populate=tags"
+        process.env.REACT_APP_API_URL +
+          "/api/projects?populate=CoverImage&populate=MainImage&populate=tags"
       )
       .then((res) => {
         setProjects(res.data.data);
@@ -27,7 +28,8 @@ export const useFetchProject = (id) => {
   const getData = () => {
     axios
       .get(
-        `http://localhost:1337/api/projects/${id}?populate=Helpers.Image&populate=Media`
+        process.env.REACT_APP_API_URL +
+          `/api/projects/${id}?populate=Helpers.Image&populate=Media`
       )
       .then((res) => {
         setProject(res.data.data);

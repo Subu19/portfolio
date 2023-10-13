@@ -14,6 +14,7 @@ import splt from "spltjs";
 import anime from "animejs";
 import gsap, { Power0 } from "gsap";
 import ImageSlider from "../others/ImageSlider";
+
 const Project = ({ id }) => {
   const { loadingProject, project } = useFetchProject(id);
   const history = useHistory();

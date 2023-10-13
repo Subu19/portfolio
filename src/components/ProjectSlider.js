@@ -64,7 +64,7 @@ const ProjectSlider = (props) => {
                   <div className="card hoverable">
                     <img
                       src={
-                        "http://localhost:1337" +
+                        process.env.REACT_APP_API_URL +
                         project.attributes.CoverImage.data.attributes.url
                       }
                       className="sliderImg"

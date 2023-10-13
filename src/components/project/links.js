@@ -13,7 +13,7 @@ const Links = ({ helpers }) => {
           return (
             <img
               src={
-                "http://localhost:1337" +
+                process.env.REACT_APP_API_URL +
                 helper.attributes.Image.data.attributes.url
               }
               className="projectHelper"
