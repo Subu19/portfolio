@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import "./css/main.css";
 import gsap, { Elastic } from "gsap";
 import { GiFastBackwardButton } from "react-icons/gi";
+import HoverableElement from "./HoverableElement";
 const Back = (props) => {
   const { to } = props;
   const history = useHistory();
@@ -36,9 +37,11 @@ const Back = (props) => {
   }, []);
 
   return (
-    <div className="backButton hoverable" onClick={handleClick}>
-      <GiFastBackwardButton></GiFastBackwardButton>
-    </div>
+    <HoverableElement>
+      <div className="backButton" onClick={handleClick}>
+        <GiFastBackwardButton></GiFastBackwardButton>
+      </div>
+    </HoverableElement>
   );
 };
 

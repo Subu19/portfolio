@@ -58,3 +58,143 @@
   margin-top: 10px;
   font-family: monospace;
 }
+
+/* /// project cards  //// */
+.projectCard {
+  background-color: rgb(7, 230, 137);
+  width: fit-content;
+  height: fit-content;
+  padding: 0px;
+  height: 350px;
+  width: 350px;
+  transition: 0.2s;
+  position: relative;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.projectCardContainner {
+  position: absolute;
+  height: 350px;
+  width: 350px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cardWaveSvg {
+  height: 300%;
+  width: 300%;
+  position: absolute;
+  top: 50%;
+  transition: 0.5s ease-out;
+}
+.cardWave {
+  fill: rgb(255, 255, 255);
+}
+.projectCardImg {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  transform-origin: center;
+  object-fit: cover;
+  transition: 0.5s ease-out;
+}
+
+.projectCard:hover .cardWaveSvg {
+  height: 350px;
+  width: 101%;
+  top: 40px;
+  transition: 0.5s ease-in-out;
+}
+
+.projectCard:hover .projectCardImg {
+  position: absolute;
+  border-radius: 50%;
+  height: 30%;
+  width: 30%;
+  border: solid 5px rgb(255, 255, 255);
+  left: -20px;
+  top: -20px;
+  object-fit: cover;
+  box-shadow: rgba(0, 0, 0, 0.536) 0px 0px 10px;
+  transition: 0.5s ease-out;
+}
+
+.projectCardBottom {
+  height: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  z-index: 10;
+  padding: 10px;
+  transition: 0.5s ease-out;
+}
+.projectCardTitle {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30px;
+  font-weight: bold;
+  transition: 0.5s ease-out;
+}
+.projectCardDesc {
+  position: absolute;
+  top: 100%;
+  left: 0px;
+  opacity: 0;
+  padding: 10px;
+  transition: 0.2s ease-out;
+}
+.projectCardDetails {
+  margin-top: 10px;
+  font-size: 16px;
+  font-family: monospace;
+}
+.projectCard:hover .projectCardDesc {
+  opacity: 1;
+  top: 40%;
+  left: 0px;
+  transition: 0.7s ease-out;
+}
+.github {
+  position: absolute;
+  right: 10px;
+  top: -50px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  transition: 0.5s ease-out;
+}
+.projectCard:hover .github {
+  top: 10px;
+  transition: 0.5s ease-out;
+}
+.projectCardTags {
+  font-size: 13px;
+  color: black;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+.projectTag {
+  background-color: rgb(136, 127, 255);
+  border-radius: 15px;
+  padding: 3px 10px 3px 10px;
+}
+.projectTag::before {
+  content: "⚪ ";
+}
+
+.projectCard .purple {
+  color: rgb(255, 255, 255);
+  background-color: rgb(183, 65, 183);
+}
+.projectCard .green {
+  color: rgb(255, 255, 255);
+  background-color: rgb(65, 183, 112);
+}
+.projectCard .blue {
+  color: rgb(255, 255, 255);
+  background-color: rgb(65, 65, 183);
+}

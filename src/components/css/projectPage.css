@@ -37,6 +37,7 @@
   margin: 20px;
   margin-right: 50px;
   text-align: start;
+  line-height: 25px;
 }
 .projectLinks {
   position: relative;
@@ -87,7 +88,7 @@
   object-fit: cover;
   border-style: solid;
   border-color: rgb(255, 255, 255);
-  box-shadow: gray 0px 5px 10px;
+  box-shadow: rgb(211, 211, 211) 0px 5px 10px;
   border-width: 10px;
   transition: 0.5s;
   cursor: pointer;
@@ -113,4 +114,9 @@
   margin-right: 50px;
   color: gray;
   text-align: justify;
+  line-height: 25px;
 }
+/* .projectPage {
+  margin-top: 200px;
+  opacity: 0;
+} */

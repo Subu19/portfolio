@@ -39459,9 +39459,11 @@ function updateCursorHover(bool) {
     }
 }
 function updateOnClick(e, element) {
-    main.style.left = e.clientX - 25 + "px";
-    main.style.top = e.clientY - 25 + "px";
-    if (element == "Cube050_3" && (0, _pages.pages).openedPage != (0, _pages.pages).project) (0, _pages.showProject)();
+    if (element == "Cube050_3" && (0, _pages.pages).openedPage != (0, _pages.pages).project) {
+        main.style.left = e.clientX - 25 + "px";
+        main.style.top = e.clientY - 25 + "px";
+        (0, _pages.showProject)();
+    }
 }
 
 },{"gsap":"fPSuC","./globalVeriable":"acJy3","./pages":"cXZuu","@parcel/transformer-js/src/esmodule-helpers.js":"kIica"}],"acJy3":[function(require,module,exports) {
@@ -39470,16 +39472,16 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "colors", ()=>colors);
 parcelHelpers.export(exports, "veriables", ()=>veriables);
 parcelHelpers.export(exports, "pages", ()=>pages);
-const colors = {
+var colors = {
     mainBack: "#ffffff",
     currentBack: "#ffffff",
     projectBack: "#182c3e",
     background: ""
 };
-const veriables = {
+var veriables = {
     loadingPage: false
 };
-const pages = {
+var pages = {
     home: 1,
     project: 2,
     openedPage: 1,

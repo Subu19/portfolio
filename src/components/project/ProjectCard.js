@@ -4,6 +4,7 @@ import openTransition from "../functions/openTransition";
 import { useContext } from "react";
 import { MouseContext } from "../contexts/mouseContext";
 import { useHistory } from "react-router-dom";
+import HoverableElement from "../HoverableElement";
 
 const ProjectCard = ({ project }) => {
   const projectImageRef = useRef(null);
@@ -27,39 +28,45 @@ const ProjectCard = ({ project }) => {
       duration: 0.2,
     });
   };
+  const addHoverEffect = (element) => {
+    console.log(element);
+  };
   return (
     <div className="project">
-      <div
-        className="projectImage hoverable"
-        onClick={() =>
-          openTransition(mousePosition).then(() =>
-            history.push("/projects/" + project.id)
-          )
-        }
-        ref={projectImageRef}
-      >
-        <img
-          src={
-            "http://localhost:1337" +
-            project.attributes.MainImage.data.attributes.url
-          }
+      <HoverableElement>
+        <div
+          className="projectImage"
           onClick={() =>
             openTransition(mousePosition).then(() =>
               history.push("/projects/" + project.id)
             )
           }
-          className="projectImageMain projectImg"
-        ></img>
-        <img
-          onMouseMove={(e) => moveImage(e)}
-          ref={coverRef}
-          src={
-            "http://localhost:1337" +
-            project.attributes.CoverImage.data.attributes.url
-          }
-          className="projectImageCover projectImg"
-        ></img>
-      </div>
+          ref={projectImageRef}
+        >
+          <img
+            src={
+              "http://localhost:1337" +
+              project.attributes.MainImage.data.attributes.url
+            }
+            onClick={() =>
+              openTransition(mousePosition).then(() =>
+                history.push("/projects/" + project.id)
+              )
+            }
+            className="projectImageMain projectImg"
+          ></img>
+          <img
+            onMouseMove={(e) => moveImage(e)}
+            ref={coverRef}
+            src={
+              "http://localhost:1337" +
+              project.attributes.CoverImage.data.attributes.url
+            }
+            className="projectImageCover projectImg"
+          ></img>
+        </div>
+      </HoverableElement>
+
       <div className="projectTitle">{project.attributes.Name}</div>
       <div className="projectDesc">React Web Application</div>
     </div>

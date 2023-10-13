@@ -574,44 +574,29 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"hhI4x":[function(require,module,exports) {
-var _gsap = require("gsap");
-var $hoverables = document.querySelectorAll(".hoverable");
-for(let i = 0; i < $hoverables.length; i++){
-    $hoverables[i].addEventListener("mouseenter", onMouseHover);
-    $hoverables[i].addEventListener("mouseleave", onMouseHoverOut);
-}
-const observer = new MutationObserver(function(mutations_list) {
-    mutations_list.forEach(function(mutation) {
-        mutation.addedNodes.forEach(function(added_node) {
-            if (added_node.classList.contains("hoverable")) {
-                $hoverables = document.querySelectorAll(".hoverable");
-                added_node.addEventListener("mouseleave", onMouseHoverOut);
-                added_node.addEventListener("mouseenter", onMouseHover);
-            }
-        });
-    });
-});
-observer.observe(document.getElementById("_root"), {
-    subtree: true,
-    childList: true
-});
-function onMouseHover() {
-    (0, _gsap.gsap).to(".cursor", {
-        width: 70,
-        height: 70,
-        duration: 1,
-        ease: (0, _gsap.Elastic).easeOut
-    });
-}
-function onMouseHoverOut() {
-    (0, _gsap.gsap).to(".cursor", {
-        width: 30,
-        height: 30,
-        duration: 1,
-        ease: (0, _gsap.Elastic).easeOut
-    });
-}
+// import { gsap, Elastic } from "gsap";
+// var $hoverables = document.querySelectorAll(".hoverable");
+// for (let i = 0; i < $hoverables.length; i++) {
+//   $hoverables[i].addEventListener("mouseenter", onMouseHover);
+//   $hoverables[i].addEventListener("mouseleave", onMouseHoverOut);
+// }
+// function onMouseHover() {
+//   gsap.to(".cursor", {
+//     width: 70,
+//     height: 70,
+//     duration: 1,
+//     ease: Elastic.easeOut,
+//   });
+// }
+// function onMouseHoverOut() {
+//   gsap.to(".cursor", {
+//     width: 30,
+//     height: 30,
+//     duration: 1,
+//     ease: Elastic.easeOut,
+//   });
+// }
 
-},{"gsap":"fPSuC"}]},["69EH3","hhI4x"], "hhI4x", "parcelRequire6913")
+},{}]},["69EH3","hhI4x"], "hhI4x", "parcelRequire6913")
 
 //# sourceMappingURL=index.939abdbf.js.map

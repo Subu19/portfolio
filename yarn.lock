@@ -8791,6 +8791,11 @@
     "select-hose" "^2.0.0"
     "spdy-transport" "^3.0.0"
 
+"spltjs@^1.1.0":
+  "integrity" "sha512-ACWucQPj0t5Bd8KohFLop22NpC249nTuwdmxlrG3sPL1+gscSWUtJHUL3weIEAxdF8+bKQfV2jzabl0S2dPBqg=="
+  "resolved" "https://registry.npmjs.org/spltjs/-/spltjs-1.1.0.tgz"
+  "version" "1.1.0"
+
 "sprintf-js@~1.0.2":
   "integrity" "sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g=="
   "resolved" "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz"

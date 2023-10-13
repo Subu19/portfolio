@@ -10,9 +10,25 @@ import { useFetchProject } from "../../hooks/fetchProjects";
 import ProjectMedia from "./ProjectMedia";
 import ReactMarkdown from "react-markdown";
 import Fade from "react-reveal/Fade";
+import splt from "spltjs";
+import anime from "animejs";
+import gsap, { Power0 } from "gsap";
 const Project = ({ id }) => {
   const { loadingProject, project } = useFetchProject(id);
   const history = useHistory();
+  useEffect(() => {}, []);
+  useEffect(() => {
+    if (!loadingProject) {
+      splt({ reveal: true });
+      anime({
+        targets: ".reveal",
+        translateY: [100, 0],
+        delay: anime.stagger(25),
+        easing: "cubicBezier(.71,-0.77,.43,1.67)",
+      });
+    }
+  }, [loadingProject]);
+
   return (
     <>
       <div className="projectHeader">
@@ -32,7 +48,7 @@ const Project = ({ id }) => {
       ) : (
         <>
           <Fade right>
-            <div className="projectTitle">{project.attributes.Name}</div>
+            <div className="projectTitle splt">{project.attributes.Name}</div>
             <div className="projectIntro">{project.attributes.Description}</div>
             <Links helpers={project.attributes.Helpers}></Links>
 

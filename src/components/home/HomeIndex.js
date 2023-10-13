@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef } from "react";
 import me from "../../assets/me.jpg";
 import { useEffect } from "react";
 import gsap, { Power4, Power0 } from "gsap";
+import HoverableElement from "../HoverableElement";
 const HomeIndex = () => {
   const containerRef = useRef(null);
 
@@ -36,11 +37,14 @@ const HomeIndex = () => {
 
   return (
     <div className="HomeIndex" ref={containerRef}>
-      <div className="profilePicContainner">
-        {"☆*: .｡. o(≧▽≦)o .｡.:*☆"}
-        <br /> Dont touch
-        <img className="profilePic" src={me}></img>
-      </div>
+      <HoverableElement>
+        <div className="profilePicContainner">
+          {"☆*: .｡. o(≧▽≦)o .｡.:*☆"}
+          <br /> Dont touch
+          <img className="profilePic" src={me}></img>
+        </div>
+      </HoverableElement>
+
       <div className="myname">Subash Acharya</div>
       <div className="myDesc">
         Experienced Web Developer and Java Enthusiast. From Interactive Websites
