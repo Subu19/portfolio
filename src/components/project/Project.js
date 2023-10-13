@@ -13,6 +13,7 @@ import Fade from "react-reveal/Fade";
 import splt from "spltjs";
 import anime from "animejs";
 import gsap, { Power0 } from "gsap";
+import ImageSlider from "../others/ImageSlider";
 const Project = ({ id }) => {
   const { loadingProject, project } = useFetchProject(id);
   const history = useHistory();
@@ -50,9 +51,16 @@ const Project = ({ id }) => {
           <Fade right>
             <div className="projectTitle splt">{project.attributes.Name}</div>
             <div className="projectIntro">{project.attributes.Description}</div>
-            <Links helpers={project.attributes.Helpers}></Links>
+            <Links
+              helpers={
+                project.attributes.Helpers.data
+                  ? project.attributes.Helpers
+                  : { data: [] }
+              }
+            ></Links>
 
-            <ProjectMedia media={project.attributes.Media}></ProjectMedia>
+            {/* <ProjectMedia media={project.attributes.Media}></ProjectMedia> */}
+            <ImageSlider media={project.attributes.Media}></ImageSlider>
             <hr
               style={{
                 width: "50%",

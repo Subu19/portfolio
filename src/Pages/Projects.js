@@ -2,24 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import Back from "../components/Back";
 import History from "../routes/history";
-import Left from "../components/Left";
 import Right from "../components/Right";
-import gsap from "gsap";
 import ProjectSvg from "../components/ProjectSvg";
-// import "../components/css/project.css";
-import ProjectSlider from "../components/ProjectSlider";
-import ProjectVertical from "../components/ProjectVertical";
-import { GrSort } from "react-icons/gr";
-import { TfiLayoutSlider } from "react-icons/tfi";
-import animenepal from "../assets/Animenepal.svg";
-import k6 from "../assets/k6.svg";
-import kurasu from "../assets/kurasu.svg";
-import craftnepal from "../assets/craftnepal.png";
+import "../components/css/project.css";
 import Project from "../components/project/Project";
-import ProjectCards from "../components/ProjectCards";
 import { useFetchProjects } from "../hooks/fetchProjects";
 import ProjectContainner from "../components/project/ProjectContainner";
 import { Fade } from "react-reveal";
+import ProjectCard from "../components/project/ProjectCard";
 
 const Projects = () => {
   const { id } = useParams();
@@ -72,7 +62,27 @@ const Projects = () => {
                     //   ></ProjectSlider>
                     //   {!onGoingAnimation ? <ProjectCards></ProjectCards> : ""}
                     // </>
-                    <ProjectContainner projects={projects}></ProjectContainner>
+                    <>
+                      <ProjectContainner
+                        projects={projects.filter(
+                          (project) => project.attributes.Big == true
+                        )}
+                      ></ProjectContainner>
+
+                      <h1 className="projectPageSubtitle">
+                        College and Side Projects
+                      </h1>
+
+                      <div className="projectCards">
+                        {projects
+                          .filter((project) => project.attributes.Big == false)
+                          .map((project) => {
+                            return (
+                              <ProjectCard project={project}></ProjectCard>
+                            );
+                          })}
+                      </div>
+                    </>
                   ) : (
                     "error.."
                   )}

@@ -126,3 +126,7 @@
   opacity: 0;
   user-select: none;
 }
+.hoverableElement {
+  width: auto;
+  max-width: none;
+}

@@ -12,9 +12,13 @@ const Links = ({ helpers }) => {
         {helpers.data.map((helper) => {
           return (
             <img
-              src={"http://localhost:1337" + helper.attributes.url}
+              src={
+                "http://localhost:1337" +
+                helper.attributes.Image.data.attributes.url
+              }
               className="projectHelper"
             ></img>
+            // <h1>hi</h1>
           );
         })}
       </div>

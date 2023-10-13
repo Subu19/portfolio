@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap, { Elastic } from "gsap";
-const HoverableElement = ({ children }) => {
+
+const HoverableElement = ({ children, className, style, onClick }) => {
   const hoverableElement = useRef(null);
   useEffect(() => {
     const element = hoverableElement.current;
@@ -27,7 +28,16 @@ const HoverableElement = ({ children }) => {
       ease: Elastic.easeOut,
     });
   };
-  return <div ref={hoverableElement}>{children}</div>;
+  return (
+    <div
+      className={className}
+      style={style}
+      onClick={onClick}
+      ref={hoverableElement}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default HoverableElement;

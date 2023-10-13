@@ -7,7 +7,7 @@ export const useFetchProjects = () => {
   const getData = () => {
     axios
       .get(
-        "http://localhost:1337/api/projects?populate=CoverImage&populate=MainImage"
+        "http://localhost:1337/api/projects?populate=CoverImage&populate=MainImage&populate=tags"
       )
       .then((res) => {
         setProjects(res.data.data);
@@ -26,10 +26,13 @@ export const useFetchProject = (id) => {
   const [project, setProject] = useState([]);
   const getData = () => {
     axios
-      .get(`http://localhost:1337/api/projects/${id}?populate=*`)
+      .get(
+        `http://localhost:1337/api/projects/${id}?populate=Helpers.Image&populate=Media`
+      )
       .then((res) => {
         setProject(res.data.data);
         setLoadingProject(false);
+        console.log(res.data.data);
       })
       .catch((err) => console.log(err));
   };
