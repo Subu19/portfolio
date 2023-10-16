@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Home from "../Pages/Home";
 import Projects from "../Pages/Projects";
+import Education from "../Pages/Education";
 // const routes = createBrowserRouter([
 //   {
 //     path: "/",
@@ -39,6 +40,9 @@ const Routes = () => {
         </Route>
         <Route exact path={"/projects/:id"}>
           <Projects></Projects>
+        </Route>
+        <Route exact path={"/education"}>
+          <Education></Education>
         </Route>
       </Switch>
     </Router>

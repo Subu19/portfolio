@@ -578,6 +578,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "focusProject", ()=>focusProject);
 parcelHelpers.export(exports, "focusMain", ()=>focusMain);
+parcelHelpers.export(exports, "focusEducation", ()=>focusEducation);
 var _three = require("three");
 var _gsap = require("gsap");
 var _orbitControls = require("three/examples/jsm/controls/OrbitControls");
@@ -595,6 +596,7 @@ var _mathUtils = require("three/src/math/MathUtils");
 const fontLoader = new (0, _fontLoader.FontLoader)();
 const testfont = fontLoader.parse((0, _optimerBoldTypefaceJsonDefault.default));
 const roomObj = new URL(require("4c0a2bfaffb117b7"));
+const roomTexture = new _three.TextureLoader().load("../texture.jpg");
 const assetLoader = new (0, _gltfloader.GLTFLoader)();
 const group = new _three.Group();
 const video = document.getElementById("video");
@@ -602,6 +604,9 @@ var model, mouse, hoverEffect = true;
 mouse = new _three.Vector2();
 const raycaster = new _three.Raycaster();
 const camera = new _three.PerspectiveCamera(75, window.innerWidth / 2 / window.innerHeight, 0.1, 2000);
+const roomMaterial = new _three.MeshBasicMaterial({
+    map: roomTexture
+});
 assetLoader.load(roomObj.href, function(gltf) {
     model = gltf.scene;
     model.traverse(function(node) {
@@ -626,7 +631,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 document.body.appendChild(renderer.domElement);
 renderer.outputEncoding = _three.sRGBEncoding;
 //dat setting
-const datGUI = new _datGui.GUI();
+// const datGUI = new dat.GUI();
 const options = {
     x: -3,
     y: 2,
@@ -736,6 +741,7 @@ document.addEventListener("mousemove", function(e) {
 //check interection
 document.addEventListener("click", (e)=>{
     checkInterection(e);
+    console.log(camera.rotation);
 });
 function focusMain() {
     (0, _gsap.gsap).to(camera.position, {
@@ -755,6 +761,7 @@ function focusMain() {
         ease: (0, _gsap.Elastic).easeInOut.config(1, 3),
         onComplete: ()=>{
             hoverEffect = true;
+            activeClick = "home";
         }
     });
 }
@@ -786,21 +793,70 @@ function focusProject() {
         duration: 1.5
     });
 }
+function focusEducation() {
+    hoverEffect = false;
+    // moveCamera(-2.7, 2.9, -1.3, 3.0, 1.5, -3.0);
+    (0, _gsap.gsap).to(group.rotation, {
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 1
+    });
+    (0, _gsap.gsap).to(group.position, {
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 1
+    });
+    (0, _gsap.gsap).to(camera.position, {
+        x: 2.3964322808341354,
+        y: 2.227126115603933,
+        z: 2.001537165614489,
+        duration: 1.5
+    });
+    (0, _gsap.gsap).to(camera.rotation, {
+        x: -3.103330952048338,
+        y: 0.005427499038900412,
+        z: 3.1415550461700366,
+        duration: 1.5
+    });
+}
+var activeClick;
 function checkInterection(event) {
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(model.children);
     intersects.forEach((e)=>{
-        if (e.object.name == "Cube050_3") (0, _cursor.updateOnClick)(event, e.object.name);
+        if (e.object.name == "Cube050_3" && e.object.name != activeClick) {
+            activeClick = e.object.name;
+            (0, _cursor.updateOnClick)(event, e.object.name);
+        }
+        if (e.object.name == "Cube016" && e.object.name != activeClick) {
+            (0, _cursor.updateOnClick)(event, e.object.name);
+            activeClick = e.object.name;
+        }
     });
 }
+const educationTT = document.getElementById("educationTT");
+const projectTT = document.getElementById("projectTT");
 function checkHover() {
     raycaster.setFromCamera(mouse, camera);
-    var _project = false;
+    // var _project = false;
+    // var _education = false;
+    var _element = false;
     const intersects = raycaster.intersectObjects(model.children);
     intersects.forEach((e)=>{
-        if (e.object.name == "Cube050_3") _project = true;
+        if (e.object.name == "Cube050_3") {
+            _element = true;
+            projectTT.style.display = "flex";
+            educationTT.style.display = "none";
+        }
+        if (e.object.name == "Cube016") {
+            _element = true;
+            educationTT.style.display = "flex";
+            projectTT.style.display = "none";
+        }
     });
-    _project ? (0, _cursor.updateCursorHover)(true) : (0, _cursor.updateCursorHover)(false);
+    _element ? (0, _cursor.updateCursorHover)(true) : (0, _cursor.updateCursorHover)(false);
 }
 
 },{"three":"ktPTu","gsap":"fPSuC","three/examples/jsm/controls/OrbitControls":"7mqRv","three/examples/jsm/loaders/GLTFLoader":"dVRsF","three/examples/jsm/environments/RoomEnvironment":"a3Q6M","dat.gui":"k3xQk","three/examples/jsm/loaders/FontLoader":"h0CPK","three/examples/jsm/geometries/TextGeometry":"d5vi9","three/examples/fonts/optimer_bold.typeface.json":"9jPWF","./cursor":"3v1v0","./pages":"cXZuu","three/src/math/MathUtils":"cuzU2","4c0a2bfaffb117b7":"hRJBw","@parcel/transformer-js/src/esmodule-helpers.js":"kIica"}],"ktPTu":[function(require,module,exports) {
@@ -39464,6 +39520,11 @@ function updateOnClick(e, element) {
         main.style.top = e.clientY - 25 + "px";
         (0, _pages.showProject)();
     }
+    if (element == "Cube016" && (0, _pages.pages).openedPage != (0, _pages.pages).education) {
+        main.style.left = e.clientX - 25 + "px";
+        main.style.top = e.clientY - 25 + "px";
+        (0, _pages.showEducation)();
+    }
 }
 
 },{"gsap":"fPSuC","./globalVeriable":"acJy3","./pages":"cXZuu","@parcel/transformer-js/src/esmodule-helpers.js":"kIica"}],"acJy3":[function(require,module,exports) {
@@ -39484,6 +39545,7 @@ var veriables = {
 var pages = {
     home: 1,
     project: 2,
+    education: 3,
     openedPage: 1,
     openTransition: true
 };
@@ -39494,6 +39556,7 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initializePage", ()=>initializePage);
 parcelHelpers.export(exports, "showHome", ()=>showHome);
 parcelHelpers.export(exports, "showProject", ()=>showProject);
+parcelHelpers.export(exports, "showEducation", ()=>showEducation);
 parcelHelpers.export(exports, "openTransition", ()=>openTransition);
 parcelHelpers.export(exports, "pages", ()=>(0, _globalVeriable.pages));
 var _gsap = require("gsap");
@@ -39504,6 +39567,7 @@ function initializePage() {
     const pathName = location.pathname;
     if (pathName == "/" || pathName == "/home") showHome();
     if (pathName == "/projects") showProject();
+    if (pathName == "/education") showEducation();
     if (pathName.match(/projects\/[0-9]/g)) {
         showOneProject();
         console.log("changed");
@@ -39619,12 +39683,25 @@ function showProject() {
         }
         (0, _main.focusProject)();
     });
-// gsap.to(".projects", {
-//   duration: 1,
-//   top: 0,
-//   opacity: 1,
-//   delay: 1,
-// });
+}
+function showEducation() {
+    // hideHome();
+    return new Promise((resolve, reject)=>{
+        (0, _globalVeriable.veriables).loadingPage = true;
+        if (!(0, _globalVeriable.pages).openTransition) openTransition().then(()=>{
+            (0, _globalVeriable.pages).openedPage = (0, _globalVeriable.pages).education;
+            (0, _globalVeriable.veriables).loadingPage = false;
+            window.history.pushState({}, "Education", "/education");
+            resolve("success");
+        });
+        else {
+            (0, _globalVeriable.pages).openedPage = (0, _globalVeriable.pages).education;
+            (0, _globalVeriable.veriables).loadingPage = false;
+            (0, _globalVeriable.colors).currentBack = (0, _globalVeriable.colors).projectBack;
+            (0, _globalVeriable.pages).openTransition = true;
+        }
+        (0, _main.focusEducation)();
+    });
 }
 
 },{"gsap":"fPSuC","./globalVeriable":"acJy3","./main":"1SICI","@parcel/transformer-js/src/esmodule-helpers.js":"kIica"}],"cuzU2":[function(require,module,exports) {

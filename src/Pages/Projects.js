@@ -62,7 +62,7 @@ const Projects = () => {
                     //   ></ProjectSlider>
                     //   {!onGoingAnimation ? <ProjectCards></ProjectCards> : ""}
                     // </>
-                    <>
+                    <Fade bottom>
                       <ProjectContainner
                         projects={projects.filter(
                           (project) => project.attributes.Big == true
@@ -82,7 +82,7 @@ const Projects = () => {
                             );
                           })}
                       </div>
-                    </>
+                    </Fade>
                   ) : (
                     "error.."
                   )}

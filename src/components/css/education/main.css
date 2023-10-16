@@ -1,0 +1,125 @@
+.right * {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.cliff {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 100vh;
+  z-index: 3;
+}
+.eduTitle {
+  color: white;
+  z-index: 2;
+  position: absolute;
+  top: 15vh;
+}
+.cloud {
+  position: absolute;
+}
+.c_far {
+  filter: brightness(0.7);
+}
+.c_farfar {
+  filter: brightness(0.5);
+}
+#cloud {
+  top: calc(100vh);
+  right: -50px;
+  height: 200px;
+  z-index: 4;
+}
+#cloud1 {
+  top: 50vh;
+  height: 80px;
+  z-index: 4;
+}
+#cloudfarr {
+  top: 200px;
+  height: 80px;
+  left: 0px;
+  z-index: 2;
+}
+#cloudfar1 {
+  top: 60vh;
+  right: 100px;
+  z-index: 2;
+}
+#cloudfarfar {
+  height: 50px;
+  top: 80vh;
+  left: 100px;
+  z-index: 0;
+}
+#cloudfarfar1 {
+  height: 40px;
+  top: 30vh;
+  left: 200px;
+  z-index: 0;
+}
+
+.fakeMargin {
+  height: 100vh;
+}
+.eduContent {
+  height: 100vh;
+}
+.line {
+  stroke-dasharray: 4000;
+  stroke-dashoffset: 4000;
+}
+.lineSVG {
+  width: 100%;
+  position: absolute;
+  top: 100vh;
+}
+.eduCard {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  border-width: 5px;
+
+  opacity: 0;
+}
+.eduCardTitle {
+  color: white;
+  font-weight: bolder;
+}
+.eduDesc {
+  font-size: 20px;
+  color: rgb(222, 222, 222);
+  font-family: monospace;
+  border-left-style: solid;
+  border-bottom-style: solid;
+  border-color: #40c9b8;
+  padding: 10px;
+}
+.eduLocate {
+  align-self: flex-end;
+  height: 100px;
+  z-index: 5;
+  margin-bottom: -15px;
+}
+#eduLocate1 {
+}
+.eduContainner {
+  position: relative;
+}
+
+.eduCardTitle1 {
+  color: white;
+  font-weight: bolder;
+  text-align: right;
+}
+.eduDesc1 {
+  font-size: 20px;
+  color: rgb(222, 222, 222);
+  font-family: monospace;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-color: #40c9b8;
+  padding: 10px;
+  display: flex;
+  text-align: right;
+}
