@@ -39537,6 +39537,7 @@ var colors = {
     mainBack: "#ffffff",
     currentBack: "#ffffff",
     projectBack: "#182c3e",
+    educationBack: "#182c3e",
     background: ""
 };
 var veriables = {
@@ -39697,7 +39698,7 @@ function showEducation() {
         else {
             (0, _globalVeriable.pages).openedPage = (0, _globalVeriable.pages).education;
             (0, _globalVeriable.veriables).loadingPage = false;
-            (0, _globalVeriable.colors).currentBack = (0, _globalVeriable.colors).projectBack;
+            (0, _globalVeriable.colors).currentBack = (0, _globalVeriable.colors).educationBack;
             (0, _globalVeriable.pages).openTransition = true;
         }
         (0, _main.focusEducation)();

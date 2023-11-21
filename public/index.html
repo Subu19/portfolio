@@ -1,46 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/index.34df27b5.css">
+    <link rel="stylesheet" href="/index.34df27b5.css" />
     <title>Document</title>
     <style></style>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script>(function() {
-    var pushState = history.pushState;
-    var replaceState = history.replaceState;
-    history.pushState = function() {
-        pushState.apply(history, arguments);
-        window.dispatchEvent(new Event("pushstate"));
-        window.dispatchEvent(new Event("locationchange"));
-    };
-    history.replaceState = function() {
-        replaceState.apply(history, arguments);
-        window.dispatchEvent(new Event("replacestate"));
-        window.dispatchEvent(new Event("locationchange"));
-    };
-    window.addEventListener("popstate", function() {
-        window.dispatchEvent(new Event("locationchange"));
-    });
-})();
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
-</script>
+    <script>
+      (function () {
+        var pushState = history.pushState;
+        var replaceState = history.replaceState;
+        history.pushState = function () {
+          pushState.apply(history, arguments);
+          window.dispatchEvent(new Event("pushstate"));
+          window.dispatchEvent(new Event("locationchange"));
+        };
+        history.replaceState = function () {
+          replaceState.apply(history, arguments);
+          window.dispatchEvent(new Event("replacestate"));
+          window.dispatchEvent(new Event("locationchange"));
+        };
+        window.addEventListener("popstate", function () {
+          window.dispatchEvent(new Event("locationchange"));
+        });
+      })();
+    </script>
   </head>
   <body>
-    <video src="/video.a7197634.mp4" autoplay="" muted="" style="display: none" id="video"></video>
+    <video
+      src="/video.a7197634.mp4"
+      autoplay=""
+      muted=""
+      style="display: none"
+      id="video"
+    ></video>
     <canvas id="canvas1"></canvas>
     <div class="hoverToolTip" id="hoverToolTip">
       <div class="tooltip" id="projectTT">
-        <img src="/project.7d7c79fd.png" id="tooltipImg" class="tooltipImg">
+        <img src="/project.7d7c79fd.png" id="tooltipImg" class="tooltipImg" />
         <div class="title" id="tooltipTitle">Projects</div>
       </div>
       <div class="tooltip" id="educationTT">
-        <img src="/education.124d3ee0.png" id="tooltipImg" class="tooltipImg">
+        <img src="/education.124d3ee0.png" id="tooltipImg" class="tooltipImg" />
         <div class="title" id="tooltipTitle">Education</div>
       </div>
     </div>

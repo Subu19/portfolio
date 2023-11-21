@@ -18,7 +18,6 @@ import ImageSlider from "../others/ImageSlider";
 const Project = ({ id }) => {
   const { loadingProject, project } = useFetchProject(id);
   const history = useHistory();
-  useEffect(() => {}, []);
   useEffect(() => {
     if (!loadingProject) {
       splt({ reveal: true });

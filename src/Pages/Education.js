@@ -7,6 +7,8 @@ import cloudfar1 from "../assets/cloudfar1.svg";
 import cloudfarfar from "../assets/cloudfarfar.svg";
 import cloudfarfar1 from "../assets/cloudfarfar1.svg";
 import eduLocate from "../assets/eduLocate.svg";
+import education from "../assets/education.svg";
+
 import ScrollTrigger from "gsap/src/ScrollTrigger";
 import gsap, { Elastic, Power0 } from "gsap";
 import Right from "../components/Right";
@@ -14,6 +16,8 @@ import Back from "../components/Back";
 import History from "../routes/history";
 import "../components/css/education/main.css";
 import { Fade } from "react-reveal";
+import anime from "animejs";
+import EducationText from "../components/others/EducationText";
 const Education = () => {
   const [showLocation1, setShowLocation1] = useState(false);
   const [showLocation2, setShowLocation2] = useState(false);
@@ -44,13 +48,7 @@ const Education = () => {
       },
       y: -100,
     });
-    gsap.to(".eduTitle", {
-      scrollTrigger: {
-        scroller: ".right",
-        scrub: true,
-      },
-      y: 400,
-    });
+
     gsap.to(".cliff", {
       scrollTrigger: {
         scroller: ".right",
@@ -74,7 +72,7 @@ const Education = () => {
         } else {
           setShowLocation1(false);
         }
-        if (progress >= 40) {
+        if (progress >= 30) {
           setShowLocation2(true);
         } else {
           setShowLocation2(false);
@@ -82,6 +80,16 @@ const Education = () => {
       },
       strokeDashoffset: 0,
     });
+
+    // complete: () => {
+    gsap.to(".eduTitle", {
+      scrollTrigger: {
+        scroller: ".right",
+        scrub: true,
+      },
+      y: 400,
+    });
+    // },
   }, []);
   useEffect(() => {
     if (showLocation1) {
@@ -130,7 +138,7 @@ const Education = () => {
     <>
       <History></History>
       <Back to={"/"}></Back>
-      <Fade right>
+      <Fade top>
         <Right>
           <img className="cliff" src={cliffSVG}></img>
           <img id="cloud" className="cloud c_close" src={cloud}></img>
@@ -148,7 +156,9 @@ const Education = () => {
             id="cloudfarfar1"
           ></img>
 
-          <h1 className="eduTitle">EDUCATION</h1>
+          <h1 className="eduTitle">
+            <EducationText></EducationText>
+          </h1>
           <div className="fakeMargin"></div>
           <svg
             viewBox="0 0 1081 1589"
